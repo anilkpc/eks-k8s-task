@@ -2,7 +2,7 @@ Deploy a full AWS EKS cluster with Terraform
 
 ## Configuration
 
-You can store state in an [S3 backend](https://www.terraform.io/docs/backends/types/s3.html), with locking via DynamoDB
+You can store state in an [S3 backend](https://www.terraform.io/docs/backends/types/s3.html), with locking via DynamoDB  
 Run `terraform init` and `terraform apply` on the `s3.tf` file to create the S3 backend before creating the cluster
 
 ### Terraform
@@ -36,8 +36,8 @@ terraform destroy  --force
 
 ### Prometheus - Grafana on EKS
 
-The manifests are present in `eks-prom-grafana` directory
-Just run the `kustomization.yaml` file and all the resources will be created.
+The manifests are present in `eks-prom-grafana` directory  
+Just run the `kustomization.yaml` file and all the resources will be created.  
 Now, we are provided with the External IP which would help us access the prometheus and grafana server.
 
 ```bash
@@ -54,7 +54,7 @@ kubectl create namespace loki
 helm repo add loki https://grafana.github.io/loki/charts
 helm repo update
 curl https://raw.githubusercontent.com/grafana/loki/master/production/helm/promtail/values.yaml > values.yaml
-helm install promtail --namespace monitoring loki/promtail -f values.yaml
+helm install promtail --namespace loki loki/promtail -f values.yaml
 ```
 
-You can reach your Grafana instance and start exploring your logs. For example, if you want to see all logs in the monitoring namespace use {namespace="monitoring"}
+You can reach your Grafana instance and start exploring your logs. For example, if you want to see all logs in the loki namespace use {namespace="loki"}
